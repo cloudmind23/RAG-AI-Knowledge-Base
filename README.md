@@ -112,6 +112,22 @@ A script is included to populate the knowledge base with 2026 NBA Playoff data (
 python ingest_nba.py
 ```
 
+### Load the UFC demo dataset
+
+This dataset populates the RAG knowledge base with **UFC all-time statistical leaders** sourced directly from [statleaders.ufc.com](https://statleaders.ufc.com/) (data as of June 7, 2026).
+
+```bash
+python ingest_ufc.py
+```
+
+### Load the FIFA demo dataset
+
+This dataset populates the RAG knowledge base with detailed **FIFA World Cup** statistics covering the **last 10 tournaments (1990–2022)** plus all-time records, sourced from Wikipedia's FIFA World Cup records and statistics page. Once ingested, you can ask natural-language questions and Claude will answer using only the ingested material.
+
+```bash
+python ingest_fifa.py
+```
+
 ## Running tests
 
 Tests mock all external I/O (FAISS, Anthropic) — no API key or network access required.
