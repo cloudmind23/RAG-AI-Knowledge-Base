@@ -130,7 +130,7 @@ python ingest_fifa.py
 
 ## Running tests
 
-Tests mock all external I/O (FAISS, Anthropic) — no API key or network access required.
+Tests mock all external I/O (FAISS, Anthropic) — no API key or network access required..
 
 ```bash
 pytest
