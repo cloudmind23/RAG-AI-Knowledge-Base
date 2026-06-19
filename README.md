@@ -1,6 +1,6 @@
 # RAG Knowledge Base API
 
-A self-hosted Retrieval-Augmented Generation (RAG) API. Ingest your documents, then ask natural-language questions — the API finds the most relevant passages and uses Claude to generate a grounded answer backed by your data.
+A self-hosted Retrieval-Augmented Generation (RAG) API. Ingest your documents, then ask natural-language questions, the API finds the most relevant passages and uses Claude to generate a grounded answer backed by your data.
 
 ## How it works
 
