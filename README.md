@@ -1,5 +1,11 @@
 # RAG Knowledge Base API
 
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat&logo=langchain&logoColor=white)
+![FAISS](https://img.shields.io/badge/FAISS-Meta-0064E0?style=flat&logo=meta&logoColor=white)
+![Claude](https://img.shields.io/badge/Claude-Anthropic-D97757?style=flat&logo=anthropic&logoColor=white)
+
 A self-hosted Retrieval-Augmented Generation (RAG) API. Ingest your documents, then ask natural-language questions, the API finds the most relevant passages and uses Claude to generate a grounded answer backed by your data.
 
 ## How it works
