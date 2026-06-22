@@ -12,6 +12,10 @@ A self-hosted Retrieval-Augmented Generation (RAG) API. Ingest your documents, t
 
 ![Swagger UI](assets/swagger_ui.png)
 
+## Why RAG?
+
+Large language models are powerful but frozen in time — they only know what they were trained on, and they'll confidently hallucinate facts they were never taught. Fine-tuning is expensive and goes stale the moment your data changes. RAG solves both problems: instead of baking knowledge into model weights, it retrieves the relevant passages from *your* documents at query time and hands them to the model as context. The model stays general-purpose; the knowledge stays fresh and under your control. This project makes that pattern production-ready — a self-hosted API you can point at any document corpus and query over HTTP, with no data ever leaving your infrastructure.
+
 ## How it works
 
 1. **Ingest** — upload files (PDF, DOCX, TXT, MD) or POST raw text. Documents are chunked and embedded using a local sentence-transformer model (`all-MiniLM-L6-v2`, ~90 MB, downloads automatically on first use).
