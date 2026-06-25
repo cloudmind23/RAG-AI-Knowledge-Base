@@ -174,7 +174,7 @@ pytest
 
 ---
 
-## Spacecraft Components Tech Stack
+## Spacecraft Components Tech - Stack
 
 - [FastAPI](https://fastapi.tiangolo.com/) — mission command framework
 - [LangChain](https://www.langchain.com/) — RAG flight orchestration
