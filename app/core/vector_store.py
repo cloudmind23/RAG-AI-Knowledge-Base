@@ -1,6 +1,9 @@
 """FAISS-backed vector store with disk persistence."""
+import os
 import shutil
 from pathlib import Path
+
+os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings

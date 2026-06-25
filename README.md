@@ -1,6 +1,6 @@
-# RAG Knowledge Base API
+# RAG Knowledge Base — Deep Space Query Engine
 
-> Ask anything about your data. Get answers grounded in fact, not hallucination.
+> Your documents. Your data. Transmitted across the cosmos — grounded in fact, not hallucination.
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
@@ -8,21 +8,31 @@
 ![FAISS](https://img.shields.io/badge/FAISS-Meta-0064E0?style=flat&logo=meta&logoColor=white)
 ![Claude](https://img.shields.io/badge/Claude-Anthropic-D97757?style=flat&logo=anthropic&logoColor=white)
 
-A self-hosted Retrieval-Augmented Generation (RAG) API. Ingest your documents, then ask natural-language questions, the API finds the most relevant passages and uses Claude to generate a grounded answer backed by your data.
+A self-hosted Retrieval-Augmented Generation (RAG) API — your mission control for intelligent document search. Upload your documents, then broadcast natural-language questions across your knowledge base. The engine locks onto the most relevant passages and deploys Claude to generate a grounded answer backed by your data, not the void of hallucination.
 
 ![Swagger UI](assets/swagger_ui.png)
 
-## Why RAG?
+---
 
-Large language models are powerful but frozen in time — they only know what they were trained on, and they'll confidently hallucinate facts they were never taught. Fine-tuning is expensive and goes stale the moment your data changes. RAG solves both problems: instead of baking knowledge into model weights, it retrieves the relevant passages from *your* documents at query time and hands them to the model as context. The model stays general-purpose; the knowledge stays fresh and under your control. This project makes that pattern production-ready — a self-hosted API you can point at any document corpus and query over HTTP, with no data ever leaving your infrastructure.
+## Mission Briefing — Why RAG?
 
-## How it works
+Large language models are powerful but frozen in time — like light from a distant star, they only carry what they knew at launch. They'll confidently fabricate facts from dark matter they were never trained on. Fine-tuning is expensive and goes stale the moment your data changes.
 
-1. **Ingest** — upload files (PDF, DOCX, TXT, MD) or POST raw text. Documents are chunked and embedded using a local sentence-transformer model (`all-MiniLM-L6-v2`, ~90 MB, downloads automatically on first use).
-2. **Store** — embeddings are persisted in a local FAISS index (`./data/faiss_index/`) that survives server restarts.
-3. **Query** — ask a question; the API retrieves the top-k most relevant chunks and sends them as context to Claude, which generates an answer without hallucinating beyond the provided material. A streaming endpoint delivers tokens in real time via Server-Sent Events.
+RAG solves both problems: instead of baking knowledge into model weights, it retrieves the relevant passages from *your* documents at query time and hands them to the model as live mission data. The model stays general-purpose; the knowledge stays fresh and under your control.
 
-## Features
+This project makes that pattern mission-ready — a self-hosted API you can point at any document corpus and query over HTTP, with no data ever leaving your infrastructure.
+
+---
+
+## Flight Plan — How It Works
+
+1. **Dock & Ingest** — upload files (PDF, DOCX, TXT, MD) or POST raw text. Documents are chunked and embedded using a local sentence-transformer model (`all-MiniLM-L6-v2`, ~90 MB, downloads automatically on first launch).
+2. **Orbit & Store** — embeddings are persisted in a local FAISS index (`./data/faiss_index/`) that survives server restarts, holding your knowledge in stable orbit.
+3. **Transmit & Query** — broadcast a question; the API retrieves the top-k most relevant chunks and sends them as mission context to Claude, which generates an answer without drifting beyond the provided material. A streaming endpoint delivers tokens in real time via Server-Sent Events.
+
+---
+
+## Payload Manifest — Features
 
 - **File ingestion**: PDF, DOCX, DOC, TXT, MD
 - **Text ingestion**: POST raw text with optional metadata
@@ -32,62 +42,72 @@ Large language models are powerful but frozen in time — they only know what th
 - **Fully local embeddings**: no extra API key or external service required for embedding
 - **Interactive docs**: Swagger UI at `/docs`, ReDoc at `/redoc`
 
-## Requirements
+---
+
+## Pre-Launch Checklist — Requirements
 
 - Python 3.11+
 - An [Anthropic API key](https://console.anthropic.com/)
 
-## Setup
+---
+
+## Launch Sequence — Setup
 
 ```bash
 git clone <your-repo-url>
 cd rag-knowledge-base
 
-# Install dependencies
+# Install mission-critical dependencies
 pip install -r requirements.txt
 
-# Configure environment
+# Configure mission parameters
 cp .env.example .env
 # Edit .env and set ANTHROPIC_API_KEY
 ```
 
-### `.env` options
+### Mission Parameters — `.env` Options
 
 | Variable | Default | Description |
 |---|---|---|
 | `ANTHROPIC_API_KEY` | *(required)* | Your Anthropic API key |
-| `CLAUDE_MODEL` | `claude-opus-4-8` | Claude model to use for generation |
+| `CLAUDE_MODEL` | `claude-opus-4-8` | Claude model deployed for answer generation |
 | `API_KEYS` | *(empty — auth disabled)* | Comma-separated valid API keys for the `X-API-Key` header |
 | `CHUNK_SIZE` | `1000` | Max characters per document chunk |
 | `CHUNK_OVERLAP` | `200` | Overlap between consecutive chunks |
 | `RETRIEVAL_K` | `5` | Number of chunks to retrieve per query |
 | `DEBUG` | `false` | Enable debug logging |
 
-## Running
+---
+
+## Liftoff — Running
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-The API is now available at `http://localhost:8000`. Visit `http://localhost:8000/docs` for the interactive Swagger UI.
+Mission Control is now live at `http://localhost:8000`. Visit `http://localhost:8000/docs` for the interactive Swagger UI.
 
-## API endpoints
+---
+
+## Mission Control — API Endpoints
 
 All endpoints (except `/health`) are prefixed with `/api/v1` and require an `X-API-Key` header if `API_KEYS` is set.
 
 | Method | Path | Description |
 |---|---|---|
-| `GET` | `/health` | Health check |
-| `POST` | `/api/v1/documents/ingest/text` | Ingest raw text |
-| `POST` | `/api/v1/documents/ingest/file` | Upload and ingest a file |
-| `GET` | `/api/v1/documents/stats` | Number of vectors in the index |
-| `DELETE` | `/api/v1/documents/all` | Wipe the entire knowledge base |
-| `POST` | `/api/v1/query/` | Ask a question (full response) |
-| `POST` | `/api/v1/query/stream` | Ask a question (SSE stream) |
+| `GET` | `/health` | Spacecraft health check |
+| `POST` | `/api/v1/documents/ingest/text` | Dock raw text into the knowledge base |
+| `POST` | `/api/v1/documents/ingest/file` | Upload and dock a file |
+| `GET` | `/api/v1/documents/stats` | Number of vectors in orbit |
+| `DELETE` | `/api/v1/documents/all` | Jettison the entire knowledge base |
+| `POST` | `/api/v1/query/` | Broadcast a question (full response) |
+| `POST` | `/api/v1/query/stream` | Broadcast a question (SSE stream) |
 
-## Example usage
+---
 
-### Ingest text
+## Mission Logs — Example Usage
+
+### Dock Text
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/documents/ingest/text \
@@ -95,14 +115,14 @@ curl -X POST http://localhost:8000/api/v1/documents/ingest/text \
   -d '{"content": "FastAPI is a modern web framework for Python.", "source": "notes.txt"}'
 ```
 
-### Ingest a file
+### Dock a File
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/documents/ingest/file \
   -F "file=@report.pdf"
 ```
 
-### Query
+### Transmit a Query
 
 ```bash
 curl -X POST http://localhost:8000/api/v1/query/ \
@@ -110,7 +130,7 @@ curl -X POST http://localhost:8000/api/v1/query/ \
   -d '{"question": "What is FastAPI?", "include_sources": true}'
 ```
 
-### Stream a query
+### Stream a Query
 
 ```bash
 curl -N -X POST http://localhost:8000/api/v1/query/stream \
@@ -118,42 +138,46 @@ curl -N -X POST http://localhost:8000/api/v1/query/stream \
   -d '{"question": "What is FastAPI?"}'
 ```
 
-### Load the NBA demo dataset
+### Load the NBA Demo Dataset
 
-A script is included to populate the knowledge base with 2026 NBA Playoff data (useful for quickly testing the API):
+A script is included to populate the knowledge base with 2026 NBA Playoff data — useful for a quick mission rehearsal:
 
 ```bash
 python ingest_nba.py
 ```
 
-### Load the UFC demo dataset
+### Load the UFC Demo Dataset
 
-This dataset populates the RAG knowledge base with **UFC all-time statistical leaders** sourced directly from [statleaders.ufc.com](https://statleaders.ufc.com/) (data as of June 7, 2026).
+Populates the knowledge base with **UFC all-time statistical leaders** sourced directly from [statleaders.ufc.com](https://statleaders.ufc.com/) (data as of June 7, 2026).
 
 ```bash
 python ingest_ufc.py
 ```
 
-### Load the FIFA demo dataset
+### Load the FIFA Demo Dataset
 
-This dataset populates the RAG knowledge base with detailed **FIFA World Cup** statistics covering the **last 10 tournaments (1990–2022)** plus all-time records, sourced from Wikipedia's FIFA World Cup records and statistics page. Once ingested, you can ask natural-language questions and Claude will answer using only the ingested material.
+Populates the knowledge base with detailed **FIFA World Cup** statistics covering the **last 10 tournaments (1990–2022)** plus all-time records, sourced from Wikipedia's FIFA World Cup records and statistics page.
 
 ```bash
 python ingest_fifa.py
 ```
 
-## Running tests
+---
 
-Tests mock all external I/O (FAISS, Anthropic) — no API key or network access required..
+## Pre-Launch Diagnostics — Running Tests
+
+Tests mock all external I/O (FAISS, Anthropic) — no API key or network access required.
 
 ```bash
 pytest
 ```
 
-## Tech stack
+---
 
-- [FastAPI](https://fastapi.tiangolo.com/) — web framework
-- [LangChain](https://www.langchain.com/) — RAG orchestration
-- [FAISS](https://github.com/facebookresearch/faiss) — vector similarity search
-- [sentence-transformers](https://www.sbert.net/) — local embeddings (`all-MiniLM-L6-v2`)
-- [Anthropic Claude](https://www.anthropic.com/) — answer generation
+## Spacecraft Components — Tech Stack
+
+- [FastAPI](https://fastapi.tiangolo.com/) — mission command framework
+- [LangChain](https://www.langchain.com/) — RAG flight orchestration
+- [FAISS](https://github.com/facebookresearch/faiss) — vector constellation search
+- [sentence-transformers](https://www.sbert.net/) — onboard local embeddings (`all-MiniLM-L6-v2`)
+- [Anthropic Claude](https://www.anthropic.com/) — deep-space answer generation
