@@ -1,6 +1,6 @@
 # RAG Knowledge Base — Deep Space Query Engine
 
-> Your documents. Your data. Transmitted across the cosmos — grounded in fact, not hallucination.
+> Your documents. Your data. Transmitted across the cosmos grounded in fact, not hallucination.
 
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
